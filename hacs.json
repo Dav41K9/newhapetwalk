@@ -1,7 +1,5 @@
 {
   "name": "PetWALK",
-  "hacs": "1.32.0",
   "render_readme": true,
-  "filename": "petwalk.zip",
   "country": ["IT", "DE", "AT", "CH"]
 }
