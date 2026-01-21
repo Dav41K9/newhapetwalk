@@ -67,9 +67,13 @@ class PetwalkSwitch(CoordinatorEntity[PetwalkCoordinator], SwitchEntity):
     @property
     def is_on(self) -> bool:
         """Return switch state."""
-        return bool(
-            self.coordinator.data.get(COORDINATOR_KEY_API_DATA, {}).get(self._api_key, False)
-        )
+        value = self.coordinator.data.get(COORDINATOR_KEY_API_DATA, {}).get(self._api_key, False)
+        
+        # Log per debug dello stato system
+        if self._api_key == "system":
+            _LOGGER.debug("Switch system is_on: valore API=%s, tipo=%s", value, type(value))
+        
+        return bool(value)
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn on."""
