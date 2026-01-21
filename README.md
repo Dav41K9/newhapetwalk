@@ -1,7 +1,7 @@
-# PetWALK Local API Integration (v3.0.0)
+# PetWALK Local API Integratio
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
-![Release](https://img.shields.io/github/v/release/YOUR_USERNAME/hapetwalk)
+![Release](https://img.shields.io/github/v/release/Dav41K9/newhapetwalk)
 
 Control your PetWALK smart door **locally** via REST API (port 8080) – no cloud required.
 
@@ -29,3 +29,4 @@ Control your PetWALK smart door **locally** via REST API (port 8080) – no clou
 
 ## Support
 [GitHub Issues](https://github.com/Dav41K9/hapetwalk/issues)
+
