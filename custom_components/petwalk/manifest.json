@@ -1,7 +1,7 @@
 {
   "domain": "petwalk",
   "name": "PetWALK Community Edition",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "documentation": "https://github.com/Dav41K9/newhapetwalk",
   "issue_tracker": "https://github.com/Dav41K9/newhapetwalk/issues",
   "codeowners": ["@Dav41K9"],
