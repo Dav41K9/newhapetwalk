@@ -100,10 +100,8 @@ class PetwalkCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                     elif isinstance(states["system"], int):
                         states["system"] = bool(states["system"])
                 
-                # Fai lo stesso per door se necessario
-                if "door" in states:
-                    if isinstance(states["door"], str):
-                        states["door"] = states["door"].lower() == "open"
+                # Per door manteniamo la stringa "open"/"closed" per la cover
+                # Non fare conversione a booleano
                 
                 _LOGGER.debug("States ricevuti dall'API: %s", states)
                 
