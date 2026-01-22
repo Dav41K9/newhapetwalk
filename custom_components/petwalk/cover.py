@@ -70,12 +70,28 @@ class PetwalkDoor(CoordinatorEntity[PetwalkCoordinator], CoverEntity):
     @property
     def is_closed(self) -> bool:
         """Return True if door is closed."""
-        return self.coordinator.data.get(COORDINATOR_KEY_API_DATA, {}).get(self._api_key) == "closed"
+        value = self.coordinator.data.get(COORDINATOR_KEY_API_DATA, {}).get(self._api_key)
+        
+        # L'API restituisce "open" o "closed" come stringhe
+        # Normalizza eventuali variazioni
+        if isinstance(value, str):
+            value_lower = value.lower()
+            is_closed = value_lower == "closed"
+        else:
+            # Fallback: se non è una stringa, considera False come aperto
+            is_closed = bool(value) if value is not None else False
+        
+        _LOGGER.debug("Door is_closed: valore API='%s', tipo=%s, risultato=%s", 
+                     value, type(value), is_closed)
+        
+        return is_closed
 
     async def async_open_cover(self, **kwargs: Any) -> None:
         """Open door."""
+        _LOGGER.debug("Comando apertura porta")
         await self.coordinator.set_state("door", True)
 
     async def async_close_cover(self, **kwargs: Any) -> None:
         """Close door."""
+        _LOGGER.debug("Comando chiusura porta")
         await self.coordinator.set_state("door", False)
