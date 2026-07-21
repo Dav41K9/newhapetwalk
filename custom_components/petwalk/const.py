@@ -13,3 +13,7 @@ DEFAULT_INCLUDE_ALL_EVENTS = False
 
 COORDINATOR_KEY_API_DATA = "api_data"
 COORDINATOR_KEY_PET_STATUS = "pet_status"
+COORDINATOR_KEY_PETS = "pets"
+
+# Home Assistant home zone entity_id.
+ZONE_HOME = "zone.home"
