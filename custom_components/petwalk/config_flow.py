@@ -41,7 +41,11 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
         modes = await client.get_modes()
         states = await client.get_states()
     except Exception as err:
-        _LOGGER.debug("Validation error %s", err)
+        # Log di errore esplicito per tracciare connessioni fallite in setup
+        _LOGGER.error(
+            "Errore di connessione durante la configurazione della porta Petwalk: %s",
+            err,
+        )
         raise CannotConnect from err
     return {"title": f"PetWALK {data[CONF_IP_ADDRESS]}"}
 
