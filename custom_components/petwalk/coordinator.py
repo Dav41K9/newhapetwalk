@@ -72,6 +72,11 @@ class PetwalkCoordinator(DataUpdateCoordinator[dict[str, Any]]):
             states = await self.client.get_states()
             _LOGGER.debug("Initial states from API: %s", states)
         except Exception as err:
+            # Log esplicito all'avvio in caso di porta offline
+            _LOGGER.error(
+                "Impossibile connettersi alla porta Petwalk all'avvio. Verifica che sia accesa e connessa al Wi-Fi. Errore: %s",
+                err,
+            )
             raise ConfigEntryNotReady from err
 
         # Aggiorniamo subito i dati
@@ -216,7 +221,11 @@ class PetwalkCoordinator(DataUpdateCoordinator[dict[str, Any]]):
                 return data
 
         except (ClientError, TimeoutError) as err:
-            _LOGGER.debug("Errore comunicazione API: %s", err)
+            # Log di livello Warning per visibilità immediata nei log standard
+            _LOGGER.warning(
+                "Persa la connessione con la porta Petwalk o timeout durante l'aggiornamento. Errore: %s",
+                err,
+            )
             raise UpdateFailed(f"Errore comunicazione API: {err}") from err
         except Exception as err:
             _LOGGER.error("Errore inatteso API: %s", err)
